@@ -292,34 +292,34 @@ input[type="date"].no-calendar-icon::-webkit-calendar-picker-indicator {
   .home-page .col-right { position: sticky; top: 88px; }
 }
 
+/* Default = outlined (empty dashed circle) */
 .home-page .custom-tick {
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    width: 24px;             /* slightly bigger so border fits */
+    width: 24px;
     height: 24px;
     border-radius: 50%;
-    border: 2px solid transparent; /* reserve space for border */
-    background-color: #FF00A1;
-    color: white;
+    border: 2px dashed #FF00A1;   /* always has a border */
+    background-color: transparent;
+    color: transparent;           /* hide ✓ */
     font-size: 14px;
-    line-height: 1;
-    font-style: normal;
     cursor: pointer;
+    box-sizing: border-box;
     transition: background-color 0.3s, border-color 0.3s;
-    box-sizing: border-box;  /* includes border in the fixed size */
 }
 
 .home-page .custom-tick::before {
     content: "\2713"; /* ✓ */
 }
 
-/* Outlined state */
-.home-page .custom-tick.outlined {
-    background-color: transparent;
-    border: 2px dashed #FF00A1; /* same thickness as transparent border */
-    color: transparent;
+/* Checked = pink filled circle with tick */
+.home-page .custom-tick.checked {
+    background-color: #FF00A1;
+    border: 2px solid #FF00A1;   /* replace dashed with solid pink */
+    color: white;
 }
+
 
 </style>
 
