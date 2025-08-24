@@ -1,0 +1,26 @@
+# Python/Flask
+__pycache__/
+*.pyc
+*.pyo
+instance/
+.env
+
+# Node/React
+node_modules/
+*.log
+build/
+dist/
+
+# Credentials / private
+service_account.json
+*.pem
+*.key
+
+# SQLite & other artifacts
+*.db
+*.sqlite3
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/

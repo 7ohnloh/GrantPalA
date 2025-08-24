@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}AnswerPal - GrantPal{% endblock %}
+
+{% block content %}
+<style>
+    body, html {
+        background-color: #f2f2f2 !important;  /* Matches React app */
+        margin: 0;
+        padding: 0;
+        height: 100%;
+    }
+
+    .answerpal-container {
+        background-color: #f2f2f2;
+        height: calc(100vh - 60px); /* Adjust if there's a top nav */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .answerpal-container iframe {
+        border: none;
+        width: 100%;
+        height: 100%;
+    }
+</style>
+
+<div class="answerpal-container">
+    <iframe 
+        src="/answerpalapp/index.html" 
+        title="AnswerPal React App">
+    </iframe>
+</div>
+{% endblock %}

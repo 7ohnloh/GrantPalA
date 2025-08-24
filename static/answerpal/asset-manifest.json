@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/answerpalapp/static/css/main.63368d41.css",
+    "main.js": "/answerpalapp/static/js/main.09b23af7.js",
+    "index.html": "/answerpalapp/index.html",
+    "static/media/dropdown-arrow.svg": "/answerpalapp/static/media/dropdown-arrow.825fcf79d83d574c5c41.svg",
+    "main.63368d41.css.map": "/answerpalapp/static/css/main.63368d41.css.map",
+    "main.09b23af7.js.map": "/answerpalapp/static/js/main.09b23af7.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.63368d41.css",
+    "static/js/main.09b23af7.js"
+  ]
+}

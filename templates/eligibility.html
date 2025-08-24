@@ -1,0 +1,260 @@
+{% extends "base.html" %}
+{% block title %}Eligibility - GrantPal{% endblock %}
+{% block content %}
+
+<!-- CheckerPal Logo and Title -->
+<div class="text-center my-4">
+  <img src="{{ url_for('static', filename='assets/CheckerPal.svg') }}" alt="CheckerPal Logo" style="height: 60px;">
+  <h2 class="mt-2" style="font-family: 'Averia Serif Libre', serif;">Checker Pal</h2>
+</div>
+
+<!-- Step Progress Tracker -->
+<div class="step-progress text-center mb-4">
+  <div class="step" id="step1">
+    <div class="circle active" id="step1Circle">1</div>
+    <div class="label">Grant Summary</div>
+  </div>
+  <div class="step" id="step2">
+    <div class="circle active" id="step2Circle">2</div>
+    <div class="label">Project Summary</div>
+  </div>
+  <div class="step" id="step3">
+    <div class="circle" id="step3Circle">3</div>
+    <div class="label">Eligibility Match</div>
+  </div>
+</div>
+
+<style>
+/* Same CSS as checkerpal for styling consistency */
+.step-progress {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 60px;
+}
+.step {
+  text-align: center;
+  min-width: 80px;
+}
+.circle {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  background-color: #fff;
+  color: #666;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 6px;
+  font-weight: bold;
+  font-size: 16px;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+.circle.active {
+  background-color: #cde2b3;
+  border-color: #4c6c3c;
+  color: black;
+  box-shadow: 0 0 4px rgba(108, 139, 111, 0.3);
+  cursor: pointer;
+}
+.label {
+  font-weight: 600;
+  font-size: 14px;
+  color: #333;
+}
+.custom-summary-button {
+  background-color: #f4f9ec;
+  border: 1px solid #cdd8c0;
+  color: #6c8b6f;
+  border-radius: 50px;
+  padding: 14px 36px;
+  font-weight: 600;
+  font-size: 18px;
+  min-width: 260px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  display: inline-block;
+}
+.custom-summary-button:hover {
+  background-color: #eaf3de;
+  box-shadow: 0 0 0 3px rgba(108, 139, 111, 0.15);
+  color: #5a755d;
+}
+.upload-box {
+  background: linear-gradient(to right, #f8fcf3, #f2f9ea);
+  border: 2px dashed #cfd8c1;
+  border-radius: 20px;
+  padding: 2rem;
+  width: 100%;
+  box-shadow: none;
+}
+.table th {
+  font-weight: 600;
+  vertical-align: top;
+  padding-top: 0.75rem;
+}
+.table td {
+  padding-top: 0.75rem;
+}
+#loadingScreen {
+  display: none;
+}
+#loadingScreen.active {
+  display: block;
+  text-align: center;
+}
+#loadingScreen img {
+  animation: float 1.5s ease-in-out infinite;
+}
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0px); }
+}
+</style>
+
+<!-- Upload Section -->
+<div class="container my-5" style="max-width: 1000px;">
+  <h5 class="text-center text-success mb-4 fw-semibold">Upload your project proposal file or link.</h5>
+
+  <form id="projectForm" class="text-center d-flex flex-column align-items-center">
+    <div class="upload-box p-4 w-100" style="max-width: 800px;">
+      <div class="text-center mb-3">
+        <img src="{{ url_for('static', filename='assets/upload-icon.svg') }}" alt="Upload Icon" style="height: 48px;" />
+      </div>
+
+      <div class="mb-3 text-center">
+        <label for="hiddenFileInput" class="form-label fw-semibold" style="cursor: pointer;">
+          <u>Choose file</u> <span class="fw-normal">or drag and drop.</span>
+        </label>
+        <input type="file" name="file" id="hiddenFileInput" style="display: none;">
+        <p id="selectedFileName" class="text-muted small mt-1"></p>
+        <p class="text-muted small">Supported documents include pdf, doc, txt.</p>
+      </div>
+
+      <div class="d-flex align-items-center justify-content-center my-3">
+        <div class="divider-line"></div>
+        <span class="mx-3 fw-semibold text-success">OR</span>
+        <div class="divider-line"></div>
+      </div>
+
+      <div class="mb-3 text-center">
+        <input type="text" name="url" placeholder="Enter a website URL here." class="form-control url-input" style="max-width: 600px; margin: 0 auto;">
+      </div>
+    </div>
+
+    <div class="text-center mt-4">
+      <button type="submit" class="btn custom-summary-button">Summarise Project</button>
+    </div>
+  </form>
+</div>
+
+<div id="projectResultBox" class="container my-5"></div>
+
+<!-- Loader -->
+<div id="loadingScreen" class="my-5">
+  <img src="{{ url_for('static', filename='assets/CheckerPal.svg') }}" alt="Loading Logo" style="height: 60px;" class="mb-3">
+  <h3 style="font-family: 'Averia Serif Libre', serif;">Summarising...</h3>
+  <div class="spinner-border text-dark mt-2" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+
+<script>
+function formatValue(v) {
+  if (!v) return "N/A";
+  if (Array.isArray(v)) return "<ul>" + v.map(i => `<li>${typeof i === 'object' ? JSON.stringify(i) : i}</li>`).join("") + "</ul>";
+  if (typeof v === "object") return "<ul>" + Object.entries(v).map(([k, val]) => `<li><b>${k}</b>: ${val}</li>`).join("") + "</ul>";
+  return v;
+}
+
+function updateStep3Circle() {
+  const step3 = document.getElementById("step3");
+  const step3Circle = document.getElementById("step3Circle");
+  const grantReady = localStorage.getItem("grantSummaryReady");
+  const projReady = localStorage.getItem("projectSummaryReady");
+
+  if (grantReady === "true" && projReady === "true") {
+    step3Circle.classList.add("active");
+    step3.style.cursor = "pointer";
+    step3.addEventListener("click", async () => {
+      const grant = JSON.parse(localStorage.getItem("grantData") || "{}");
+      const project = JSON.parse(localStorage.getItem("projectData") || "{}");
+
+      const res = await fetch("/eligibilityresults", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ grant, project })
+      });
+
+      const html = await res.text();
+      document.open();
+      document.write(html);
+      document.close();
+    });
+  }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  updateStep3Circle();
+
+  const fileInput = document.getElementById("hiddenFileInput");
+  const fileLabel = document.querySelector("label[for='hiddenFileInput']");
+  const fileNameDisplay = document.getElementById("selectedFileName");
+
+  fileLabel.addEventListener("click", () => fileInput.click());
+  fileInput.addEventListener("change", () => {
+    fileNameDisplay.textContent = fileInput.files[0] ? `Selected: ${fileInput.files[0].name}` : "";
+  });
+});
+
+document.getElementById("projectForm").addEventListener("submit", async function (e) {
+  e.preventDefault();
+  const form = new FormData(this);
+  form.append("mode", "project");
+  const box = document.getElementById("projectResultBox");
+  const loader = document.getElementById("loadingScreen");
+
+  box.innerHTML = "";
+  loader.classList.add("active");
+
+  const res = await fetch("/evaluate", { method: "POST", body: form });
+  const result = await res.json();
+
+  loader.classList.remove("active");
+
+  if (result.error) {
+    box.innerHTML = `<div class="alert alert-danger">${result.error}</div>`;
+  } else {
+    localStorage.setItem("projectSummaryReady", "true");
+    localStorage.setItem("projectData", JSON.stringify(result));
+    updateStep3Circle();
+
+    box.innerHTML = `
+      <div class="card p-4 shadow-sm border-0">
+        <h4 class="mb-4">Project Information</h4>
+        <div class="table-responsive">
+          <table class="table table-borderless align-middle">
+            <tbody>
+              <tr><th class="w-25 text-dark">Project Name</th><td>${formatValue(result.project_name)}</td></tr>
+              <tr><th class="text-dark">Description</th><td>${formatValue(result.project_description)}</td></tr>
+              <tr><th class="text-dark">Timeline</th><td>${formatValue(result.timeline)}</td></tr>
+              <tr><th class="text-dark">Budget</th><td>${formatValue(result.budget)}</td></tr>
+              <tr><th class="text-dark">Key Objectives</th><td>${formatValue(result.key_objectives)}</td></tr>
+              <tr><th class="text-dark">Key Directions</th><td>${formatValue(result.key_directions)}</td></tr>
+              <tr><th class="text-dark">Target Beneficiaries</th><td>${formatValue(result.target_beneficiaries)}</td></tr>
+              <tr><th class="text-dark">Volunteer Roles</th><td>${formatValue(result.volunteer_roles)}</td></tr>
+              <tr><th class="text-dark">Partnerships</th><td>${formatValue(result.partnerships)}</td></tr>
+              <tr><th class="text-dark">Justification</th><td>${formatValue(result.justification)}</td></tr>
+              <tr><th class="text-dark">Evaluation Methods</th><td>${formatValue(result.evaluation_methods)}</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    `;
+  }
+});
+</script>
+
+{% endblock %}

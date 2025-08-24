@@ -1,0 +1,565 @@
+{% extends "base.html" %}
+{% block title %}Home - GrantPal{% endblock %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-9">
+            <h3 class="mb-1">Grant Applications</h3>
+            <h5 class="text-muted mb-4" style="font-weight: 400; font-size: 20px;">For Projects</h5>
+
+            <div class="project-wrapper p-4 mb-4">
+
+                <div class="project-list-container collapsed-projects">
+                    
+                    <div class="mb-5">
+                        <div class="d-flex justify-content-between align-items-center mb-2" style="margin-top: 0; margin-bottom: 8px;">
+                            <h5 class="project-header" style="font-weight: 550;">Being Guests</h5>
+                            <img src="{{ url_for('static', filename='assets/tripledot.svg') }}" alt="Options" style="width: 20px; height: 20px; cursor: pointer;">
+                        </div>
+                        <hr class="custom-separator" style="margin-bottom: 30px;">
+                        <div class="horizontal-scroll-wrapper mb-4">
+                            <div class="row flex-nowrap">
+                                
+                                <div class="custom-card-width">
+                                    <div class="card mb-3">
+                                        <div class="card-body card-body-bordered">
+                                            <div class="mb-2">
+                                                <select class="form-select status-dropdown small-dropdown" style="max-width: 160px;">
+                                                    <option value="Urgent" selected>Urgent</option>
+                                                    <option value="In Progress">In Progress</option>
+                                                    <option value="Not Started">Not Started</option>
+                                                </select>
+                                            </div>
+                                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <input type="date" class="form-control no-calendar-icon date-input" value="2025-08-02" style="width: 140px;" />
+                                                    <i class="bi bi-calendar3 calendar-icon" style="font-size: 1.3rem; cursor: pointer;" title="Open calendar"></i>
+                                                </div>
+                                                <button class="btn btn-outline-secondary save-to-calendar-btn" data-title="Temasek Foundation" data-description="Being Guests">
+                                                    Save deadline
+                                                </button>
+                                            </div>
+                                            <h6 class="mt-3">Temasek Foundation</h6>
+                                            <p class="small">
+                                                <strong>Timeline:</strong> Projects should commence within 30 days<br>
+                                                <strong>Eligible Applicants:</strong> Individuals or groups<br>
+                                                <strong>Budget:</strong> Up to 80% sponsorship
+                                            </p>
+                                            <div class="border rounded p-2 mb-2 bg-light shadow-sm">
+                                                <p class="mb-1 text-muted small">Last opened: 1 Jun</p>
+                                                <h6 class="mb-1"><i class="bi bi-file-earmark-text me-1"></i>Project Proposal</h6>
+                                                <p class="small text-secondary mb-0">This proposal outlines a 6-month plan to provide 500 care kits to seniors. Volunteers and clinics will be engaged to identify needs...</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="custom-card-width">
+                                    <div class="card mb-3">
+                                        <div class="card-body card-body-bordered">
+                                            <div class="mb-2">
+                                                <select class="form-select status-dropdown small-dropdown" style="max-width: 160px;">
+                                                    <option value="Urgent">Urgent</option>
+                                                    <option value="In Progress" selected>In Progress</option>
+                                                    <option value="Not Started">Not Started</option>
+                                                </select>
+                                            </div>
+                                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <input type="date" class="form-control no-calendar-icon date-input" value="2025-08-02" style="width: 140px;" />
+                                                    <i class="bi bi-calendar3 calendar-icon" style="font-size: 1.3rem; cursor: pointer;" title="Open calendar"></i>
+                                                </div>
+                                                <button class="btn btn-outline-secondary save-to-calendar-btn" data-title="Temasek Foundation" data-description="Being Guests">
+                                                    Save deadline
+                                                </button>
+                                            </div>
+                                            <h6 class="mt-3">Temasek Foundation</h6>
+                                            <p class="small">
+                                                <strong>Timeline:</strong> Projects should commence within 30 days<br>
+                                                <strong>Eligible Applicants:</strong> Individuals or groups<br>
+                                                <strong>Budget:</strong> Up to 80% sponsorship
+                                            </p>
+                                            <div class="border rounded p-2 mb-2 bg-light shadow-sm">
+                                                <p class="mb-1 text-muted small">Last opened: 1 Jun</p>
+                                                <h6 class="mb-1"><i class="bi bi-file-earmark-text me-1"></i>Project Proposal</h6>
+                                                <p class="small text-secondary mb-0">This proposal outlines a 6-month plan to provide 500 care kits to seniors. Volunteers and clinics will be engaged to identify needs...</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="custom-card-width">
+                                    <div class="card mb-3">
+                                        <div class="card-body card-body-bordered">
+                                            <div class="mb-2">
+                                                <select class="form-select status-dropdown small-dropdown" style="max-width: 160px;">
+                                                    <option value="Urgent">Urgent</option>
+                                                    <option value="In Progress">In Progress</option>
+                                                    <option value="Not Started" selected>Not Started</option>
+                                                </select>
+                                            </div>
+                                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <input type="date" class="form-control no-calendar-icon date-input" value="2025-08-02" style="width: 140px;" />
+                                                    <i class="bi bi-calendar3 calendar-icon" style="font-size: 1.3rem; cursor: pointer;" title="Open calendar"></i>
+                                                </div>
+                                                <button class="btn btn-outline-secondary save-to-calendar-btn" data-title="Temasek Foundation" data-description="Being Guests">
+                                                    Save deadline
+                                                </button>
+                                            </div>
+                                            <h6 class="mt-3">Temasek Foundation</h6>
+                                            <p class="small">
+                                                <strong>Timeline:</strong> Projects should commence within 30 days<br>
+                                                <strong>Eligible Applicants:</strong> Individuals or groups<br>
+                                                <strong>Budget:</strong> Up to 80% sponsorship
+                                            </p>
+                                            <div class="border rounded p-2 mb-2 bg-light shadow-sm">
+                                                <p class="mb-1 text-muted small">Last opened: 1 Jun</p>
+                                                <h6 class="mb-1"><i class="bi bi-file-earmark-text me-1"></i>Project Proposal</h6>
+                                                <p class="small text-secondary mb-0">This proposal outlines a 6-month plan to provide 500 care kits to seniors. Volunteers and clinics will be engaged to identify needs...</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-5">
+                        <div class="d-flex justify-content-between align-items-center mb-2" style="margin-top: 0; margin-bottom: 8px;">
+                            <h5 class="project-header" style="font-weight: 550;">Care Companions</h5>
+                            <img src="{{ url_for('static', filename='assets/tripledot.svg') }}" alt="Options" style="width: 20px; height: 20px; cursor: pointer;">
+                        </div>
+                        <hr class="custom-separator" style="margin-bottom: 30px;">
+                        <div class="horizontal-scroll-wrapper mb-4">
+                            <div class="row flex-nowrap">
+
+                                <div class="custom-card-width">
+                                    <div class="card mb-3">
+                                        <div class="card-body card-body-bordered">
+                                            <div class="mb-2">
+                                                <select class="form-select status-dropdown small-dropdown" style="max-width: 160px;">
+                                                    <option value="Urgent" selected>Urgent</option>
+                                                    <option value="In Progress">In Progress</option>
+                                                    <option value="Not Started">Not Started</option>
+                                                </select>
+                                            </div>
+                                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <input type="date" class="form-control no-calendar-icon date-input" value="2025-08-02" style="width: 140px;" />
+                                                    <i class="bi bi-calendar3 calendar-icon" style="font-size: 1.3rem; cursor: pointer;" title="Open calendar"></i>
+                                                </div>
+                                                <button class="btn btn-outline-secondary save-to-calendar-btn" data-title="SG Enable" data-description="Care Companions">
+                                                    Save deadline
+                                                </button>
+                                            </div>
+                                            <h6 class="mt-3">SG Enable</h6>
+                                            <p class="small">
+                                                <strong>Timeline:</strong> Project must conclude within 6 months<br>
+                                                <strong>Eligible Applicants:</strong> Non-profits<br>
+                                                <strong>Budget:</strong> Max funding $50,000
+                                            </p>
+                                            <div class="border rounded p-2 mb-2 bg-light shadow-sm">
+                                                <p class="mb-1 text-muted small">Last opened: 15 Jul</p>
+                                                <h6 class="mb-1"><i class="bi bi-file-earmark-text me-1"></i>Proposal - Companion Outreach</h6>
+                                                <p class="small text-secondary mb-0">The Care Companions project recruits volunteers to check in on isolated seniors. It includes wellness packs and mental health support...</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="custom-card-width">
+                                    <div class="card mb-3">
+                                        <div class="card-body card-body-bordered">
+                                            <div class="mb-2">
+                                                <select class="form-select status-dropdown small-dropdown" style="max-width: 160px;">
+                                                    <option value="Urgent">Urgent</option>
+                                                    <option value="In Progress" selected>In Progress</option>
+                                                    <option value="Not Started">Not Started</option>
+                                                </select>
+                                            </div>
+                                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <input type="date" class="form-control no-calendar-icon date-input" value="2025-08-02" style="width: 140px;" />
+                                                    <i class="bi bi-calendar3 calendar-icon" style="font-size: 1.3rem; cursor: pointer;" title="Open calendar"></i>
+                                                </div>
+                                                <button class="btn btn-outline-secondary save-to-calendar-btn" data-title="SG Enable" data-description="Care Companions">
+                                                    Save deadline
+                                                </button>
+                                            </div>
+                                            <h6 class="mt-3">SG Enable</h6>
+                                            <p class="small">
+                                                <strong>Timeline:</strong> Project must conclude within 6 months<br>
+                                                <strong>Eligible Applicants:</strong> Non-profits<br>
+                                                <strong>Budget:</strong> Max funding $50,000
+                                            </p>
+                                            <div class="border rounded p-2 mb-2 bg-light shadow-sm">
+                                                <p class="mb-1 text-muted small">Last opened: 15 Jul</p>
+                                                <h6 class="mb-1"><i class="bi bi-file-earmark-text me-1"></i>Proposal - Companion Outreach</h6>
+                                                <p class="small text-secondary mb-0">The Care Companions project recruits volunteers to check in on isolated seniors. It includes wellness packs and mental health support...</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="custom-card-width">
+                                    <div class="card mb-3">
+                                        <div class="card-body card-body-bordered">
+                                            <div class="mb-2">
+                                                <select class="form-select status-dropdown small-dropdown" style="max-width: 160px;">
+                                                    <option value="Urgent">Urgent</option>
+                                                    <option value="In Progress">In Progress</option>
+                                                    <option value="Not Started" selected>Not Started</option>
+                                                </select>
+                                            </div>
+                                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <input type="date" class="form-control no-calendar-icon date-input" value="2025-08-02" style="width: 140px;" />
+                                                    <i class="bi bi-calendar3 calendar-icon" style="font-size: 1.3rem; cursor: pointer;" title="Open calendar"></i>
+                                                </div>
+                                                <button class="btn btn-outline-secondary save-to-calendar-btn" data-title="SG Enable" data-description="Care Companions">
+                                                    Save deadline
+                                                </button>
+                                            </div>
+                                            <h6 class="mt-3">SG Enable</h6>
+                                            <p class="small">
+                                                <strong>Timeline:</strong> Project must conclude within 6 months<br>
+                                                <strong>Eligible Applicants:</strong> Non-profits<br>
+                                                <strong>Budget:</strong> Max funding $50,000
+                                            </p>
+                                            <div class="border rounded p-2 mb-2 bg-light shadow-sm">
+                                                <p class="mb-1 text-muted small">Last opened: 15 Jul</p>
+                                                <h6 class="mb-1"><i class="bi bi-file-earmark-text me-1"></i>Proposal - Companion Outreach</h6>
+                                                <p class="small text-secondary mb-0">The Care Companions project recruits volunteers to check in on isolated seniors. It includes wellness packs and mental health support...</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-5">
+                        <div class="d-flex justify-content-between align-items-center mb-2" style="margin-top: 0; margin-bottom: 8px;">
+                            <h5 class="project-header" style="font-weight: 550;">EcoNova Urban Gardens</h5>
+                            <img src="{{ url_for('static', filename='assets/tripledot.svg') }}" alt="Options" style="width: 20px; height: 20px; cursor: pointer;">
+                        </div>
+                        <hr class="custom-separator" style="margin-bottom: 30px;">
+                        <div class="horizontal-scroll-wrapper mb-4">
+                            <div class="row flex-nowrap">
+
+                                <div class="custom-card-width">
+                                    <div class="card mb-3">
+                                        <div class="card-body card-body-bordered">
+                                            <div class="mb-2">
+                                                <select class="form-select status-dropdown small-dropdown" style="max-width: 160px;">
+                                                    <option value="Urgent" selected>Urgent</option>
+                                                    <option value="In Progress">In Progress</option>
+                                                    <option value="Not Started">Not Started</option>
+                                                </select>
+                                            </div>
+                                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <input type="date" class="form-control no-calendar-icon date-input" value="2025-08-02" style="width: 140px;" />
+                                                    <i class="bi bi-calendar3 calendar-icon" style="font-size: 1.3rem; cursor: pointer;" title="Open calendar"></i>
+                                                </div>
+                                                <button class="btn btn-outline-secondary save-to-calendar-btn" data-title="Green Futures Fund" data-description="EcoNova Urban Gardens">
+                                                    Save deadline
+                                                </button>
+                                            </div>
+                                            <h6 class="mt-3">Green Futures Fund</h6>
+                                            <p class="small">
+                                                <strong>Timeline:</strong> Launch within 90 days<br>
+                                                <strong>Eligible Applicants:</strong> Environmental orgs<br>
+                                                <strong>Budget:</strong> Grants up to $100,000
+                                            </p>
+                                            <div class="border rounded p-2 mb-2 bg-light shadow-sm">
+                                                <p class="mb-1 text-muted small">Last opened: 10 Aug</p>
+                                                <h6 class="mb-1"><i class="bi bi-file-earmark-text me-1"></i>Urban Gardens Grant Draft</h6>
+                                                <p class="small text-secondary mb-0">EcoNova is a modular hydroponics solution designed for urban rooftops. It supports sustainable produce with minimal water waste...</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="custom-card-width">
+                                    <div class="card mb-3">
+                                        <div class="card-body card-body-bordered">
+                                            <div class="mb-2">
+                                                <select class="form-select status-dropdown small-dropdown" style="max-width: 160px;">
+                                                    <option value="Urgent">Urgent</option>
+                                                    <option value="In Progress" selected>In Progress</option>
+                                                    <option value="Not Started">Not Started</option>
+                                                </select>
+                                            </div>
+                                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <input type="date" class="form-control no-calendar-icon date-input" value="2025-08-02" style="width: 140px;" />
+                                                    <i class="bi bi-calendar3 calendar-icon" style="font-size: 1.3rem; cursor: pointer;" title="Open calendar"></i>
+                                                </div>
+                                                <button class="btn btn-outline-secondary save-to-calendar-btn" data-title="Green Futures Fund" data-description="EcoNova Urban Gardens">
+                                                    Save deadline
+                                                </button>
+                                            </div>
+                                            <h6 class="mt-3">Green Futures Fund</h6>
+                                            <p class="small">
+                                                <strong>Timeline:</strong> Launch within 90 days<br>
+                                                <strong>Eligible Applicants:</strong> Environmental orgs<br>
+                                                <strong>Budget:</strong> Grants up to $100,000
+                                            </p>
+                                            <div class="border rounded p-2 mb-2 bg-light shadow-sm">
+                                                <p class="mb-1 text-muted small">Last opened: 10 Aug</p>
+                                                <h6 class="mb-1"><i class="bi bi-file-earmark-text me-1"></i>Urban Gardens Grant Draft</h6>
+                                                <p class="small text-secondary mb-0">EcoNova is a modular hydroponics solution designed for urban rooftops. It supports sustainable produce with minimal water waste...</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="custom-card-width">
+                                    <div class="card mb-3">
+                                        <div class="card-body card-body-bordered">
+                                            <div class="mb-2">
+                                                <select class="form-select status-dropdown small-dropdown" style="max-width: 160px;">
+                                                    <option value="Urgent">Urgent</option>
+                                                    <option value="In Progress">In Progress</option>
+                                                    <option value="Not Started" selected>Not Started</option>
+                                                </select>
+                                            </div>
+                                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <input type="date" class="form-control no-calendar-icon date-input" value="2025-08-02" style="width: 140px;" />
+                                                    <i class="bi bi-calendar3 calendar-icon" style="font-size: 1.3rem; cursor: pointer;" title="Open calendar"></i>
+                                                </div>
+                                                <button class="btn btn-outline-secondary save-to-calendar-btn" data-title="Green Futures Fund" data-description="EcoNova Urban Gardens">
+                                                    Save deadline
+                                                </button>
+                                            </div>
+                                            <h6 class="mt-3">Green Futures Fund</h6>
+                                            <p class="small">
+                                                <strong>Timeline:</strong> Launch within 90 days<br>
+                                                <strong>Eligible Applicants:</strong> Environmental orgs<br>
+                                                <strong>Budget:</strong> Grants up to $100,000
+                                            </p>
+                                            <div class="border rounded p-2 mb-2 bg-light shadow-sm">
+                                                <p class="mb-1 text-muted small">Last opened: 10 Aug</p>
+                                                <h6 class="mb-1"><i class="bi bi-file-earmark-text me-1"></i>Urban Gardens Grant Draft</h6>
+                                                <p class="small text-secondary mb-0">EcoNova is a modular hydroponics solution designed for urban rooftops. It supports sustainable produce with minimal water waste...</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-divider"></div>
+
+                <div class="text-center">
+                    <button class="btn toggle-projects-btn" style="border: none; background: none; padding: 0;">
+                        <i class="bi bi-chevron-down"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="text-center mt-4">
+                <button class="btn btn-outline-secondary w-100">+ New Grant</button>
+            </div>
+        </div>
+        
+        <div class="col-md-3">
+            <div class="mb-4 todolist-container">
+                <h5 class="todolist-heading">To-do List</h5>
+                <ul class="list-group rounded-0 collapsed-list">
+                    
+                    <div class="d-flex align-items-center mb-2 list-item-wrapper">
+                        <li class="list-group-item custom-list-item">
+                            <div>
+                                <span class="task-title">Temasek Foundation Application</span>
+                                <small class="text-muted d-block">By Aug 25</small>
+                            </div>
+                        </li>
+                        <i class="custom-tick ms-2 outlined"></i>
+                    </div>
+                    
+                    <div class="d-flex align-items-center mb-2 list-item-wrapper">
+                        <li class="list-group-item custom-list-item">
+                            <div>
+                                <span class="task-title">Regenerate MCCY answers</span>
+                                <small class="text-muted d-block">By Sep 05</small>
+                            </div>
+                        </li>
+                        <i class="custom-tick ms-2 outlined"></i>
+                    </div>
+                    
+                    <div class="d-flex align-items-center mb-2 list-item-wrapper">
+                        <li class="list-group-item custom-list-item">
+                            <div>
+                                <span class="task-title">Finalize MCCY Application</span>
+                                <small class="text-muted d-block">By Sep 08</small>
+                            </div>
+                        </li>
+                        <i class="custom-tick ms-2 outlined"></i>
+                    </div>
+                    
+                    <div class="d-flex align-items-center mb-2 list-item-wrapper">
+                        <li class="list-group-item custom-list-item">
+                            <div>
+                                <span class="task-title">Care Companion Grant Applications</span>
+                                <small class="text-muted d-block">By Sep 21</small>
+                            </div>
+                        </li>
+                        <i class="custom-tick ms-2"></i>
+                    </div>
+                    
+                    <div class="d-flex align-items-center mb-2 list-item-wrapper">
+                        <li class="list-group-item custom-list-item">
+                            <div>
+                                <span class="task-title">BeingGuests Grant Applications</span>
+                                <small class="text-muted d-block">By Oct 02</small>
+                            </div>
+                        </li>
+                        <i class="custom-tick ms-2"></i>
+                    </div>
+                    
+                </ul>
+                <div class="todolist-divider"></div>
+                <div class="text-center">
+                    <button class="btn toggle-list-btn" style="border: none; background: none; padding: 0;">
+                        <i class="bi bi-chevron-down"></i>
+                    </button>
+                </div>
+            </div>
+            <button class="btn btn-outline-secondary mt-2 todolist-button">+ New Task</button>
+            <div class="mb-5 custom-calendar-container">
+                <iframe 
+                    src="https://calendar.google.com/calendar/embed?src=beingthebridges%40gmail.com&ctz=Asia%2FSingapore"
+                    style="border: 0" width="300px" height="400" frameborder="0" scrolling="no">
+                </iframe>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body text-center">
+        <div class="d-flex align-items-center justify-content-center mb-3">
+            <i class="bi bi-check-circle-fill me-2" style="color: #e83e8c; font-size: 1.5rem;"></i>
+            <h5 class="fw-normal mb-0">Date added to Google Calendar!</h5>
+        </div>
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Done</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Status color handler
+function updateStatusColor(dropdown) {
+    // Remove all the bg and text-white classes first
+    dropdown.classList.remove("bg-warning", "bg-info", "bg-danger", "text-white");
+
+    // Add appropriate classes based on selected value
+    if (dropdown.value === "Not Started") {
+        dropdown.classList.add("bg-warning"); // yellowish background
+        dropdown.classList.remove("text-white"); // dark text
+    } else if (dropdown.value === "In Progress") {
+        dropdown.classList.add("bg-info", "text-white"); // blue bg with white text
+    } else if (dropdown.value === "Urgent") {
+        dropdown.classList.add("bg-danger", "text-white"); // red bg with white text
+    }
+}
+
+// Initialize colors on page load and listen for changes
+document.querySelectorAll('.status-dropdown').forEach(dropdown => {
+    updateStatusColor(dropdown); // Set initial color
+    dropdown.addEventListener('change', () => updateStatusColor(dropdown));
+});
+
+// Save to Calendar Button
+document.querySelectorAll('.save-to-calendar-btn, .save-calendar-btn').forEach(button => {
+    button.addEventListener('click', async () => {
+        const container = button.closest('.card-body');
+        const dateInput = container.querySelector('input[type="date"]');
+        const dueDate = dateInput.value;
+        const title = button.dataset.title;
+        const description = button.dataset.description;
+
+        if (!dueDate) return alert("Please select a date before saving to calendar.");
+
+        const response = await fetch('/add-to-calendar', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ title, description, date: dueDate })
+        });
+
+        const result = await response.json();
+        if (result.success) {
+            const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+            successModal.show();
+        }
+        else alert("❌ Failed to add to calendar.");
+    });
+});
+document.querySelectorAll('.calendar-icon').forEach(icon => {
+  icon.addEventListener('click', () => {
+    const input = icon.previousElementSibling;
+    if (input && input.showPicker) {
+      input.showPicker();
+    } else {
+      input.focus();
+    }
+  });
+});
+
+// Get all elements with the class 'custom-tick'
+const ticks = document.querySelectorAll('.custom-tick');
+
+// Loop through each tick and add a click event listener
+ticks.forEach(tick => {
+    tick.addEventListener('click', () => {
+        // This toggles the 'outlined' class on and off
+        tick.classList.toggle('outlined');
+    });
+});
+
+// New script for project section expansion
+const projectsContainer = document.querySelector('.project-list-container');
+const projectsToggleBtn = document.querySelector('.toggle-projects-btn');
+const projectsToggleIcon = projectsToggleBtn.querySelector('.bi');
+
+projectsToggleBtn.addEventListener('click', () => {
+    // Toggle the 'expanded' class to control the max-height
+    projectsContainer.classList.toggle('expanded');
+    
+    // Toggle the icon
+    if (projectsContainer.classList.contains('expanded')) {
+        projectsToggleIcon.classList.replace('bi-chevron-down', 'bi-chevron-up');
+    } else {
+        projectsToggleIcon.classList.replace('bi-chevron-up', 'bi-chevron-down');
+    }
+
+    // Toggle the fade-out overlay
+    projectsContainer.classList.toggle('collapsed-projects');
+});
+
+// To-do List toggle
+const todoList = document.querySelector('.todolist-container .list-group');
+const todoToggleBtn = document.querySelector('.toggle-list-btn');
+const todoToggleIcon = todoToggleBtn.querySelector('.bi');
+
+todoToggleBtn.addEventListener('click', () => {
+    todoList.classList.toggle('expanded');
+    if (todoList.classList.contains('expanded')) {
+        todoToggleIcon.classList.replace('bi-chevron-down', 'bi-chevron-up');
+    } else {
+        todoToggleIcon.classList.replace('bi-chevron-up', 'bi-chevron-down');
+    }
+});
+</script>
+{% endblock %}

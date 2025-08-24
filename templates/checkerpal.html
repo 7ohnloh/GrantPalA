@@ -1,0 +1,253 @@
+{% extends "base.html" %}
+{% block title %}CheckerPal{% endblock %}
+{% block content %}
+
+<!-- CheckerPal Logo and Title -->
+<div class="text-center my-4">
+    <img src="{{ url_for('static', filename='assets/CheckerPal.svg') }}" alt="CheckerPal Logo" style="height: 60px;">
+    <h2 class="mt-2" style="font-family: 'Averia Serif Libre', serif;">Checker Pal</h2>
+</div>
+
+<!-- Step Progress Tracker -->
+<div class="step-progress text-center mb-4">
+    <div class="step" id="step1">
+        <div class="circle active" id="step1Circle">1</div>
+        <div class="label">Grant Summary</div>
+    </div>
+    <div class="step" id="step2">
+        <div class="circle" id="step2Circle">2</div>
+        <div class="label">Project Summary</div>
+    </div>
+    <div class="step" id="step3">
+        <div class="circle" id="step3Circle">3</div>
+        <div class="label">Eligibility Match</div>
+    </div>
+</div>
+
+<!-- Styling -->
+<style>
+    .step-progress {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 60px;
+        margin-bottom: 1rem;
+    }
+    .step {
+        text-align: center;
+        min-width: 80px;
+    }
+    .circle {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        border: 2px solid #ccc;
+        background-color: #fff;
+        color: #666;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 6px;
+        font-weight: bold;
+        font-size: 16px;
+        transition: background-color 0.3s, border-color 0.3s;
+    }
+    .circle.active {
+        background-color: #cde2b3;
+        border-color: #4c6c3c;
+        color: black;
+        box-shadow: 0 0 4px rgba(108, 139, 111, 0.3);
+        cursor: pointer;
+    }
+    .label {
+        font-weight: 600;
+        font-size: 14px;
+        color: #333;
+    }
+    #loadingScreen {
+        display: none;
+    }
+    #loadingScreen.active {
+        display: block;
+        text-align: center;
+    }
+    #loadingScreen img {
+        animation: float 1.5s ease-in-out infinite;
+    }
+    @keyframes float {
+        0%   { transform: translateY(0px); }
+        50%  { transform: translateY(-8px); }
+        100% { transform: translateY(0px); }
+    }
+    .custom-summary-button {
+        background-color: #f4f9ec;
+        border: 1px solid #cdd8c0;
+        color: #6c8b6f;
+        border-radius: 50px;
+        padding: 14px 36px;
+        font-weight: 600;
+        font-size: 18px;
+        min-width: 260px;
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        display: inline-block;
+    }
+    .custom-summary-button:hover {
+        background-color: #eaf3de;
+        box-shadow: 0 0 0 3px rgba(108, 139, 111, 0.15);
+        color: #5a755d;
+    }
+    .upload-box {
+        background: linear-gradient(to right, #f8fcf3, #f2f9ea);
+        border: 2px dashed #cfd8c1;
+        border-radius: 20px;
+        padding: 2rem;
+        width: 100%;
+        box-shadow: none;
+    }
+    .table th {
+        font-weight: 600;
+        vertical-align: top;
+        padding-top: 0.75rem;
+    }
+    .table td {
+        padding-top: 0.75rem;
+    }
+</style>
+
+<!-- Upload Section -->
+<div class="container my-5" style="max-width: 1000px;">
+    <h5 class="text-center text-success mb-4 fw-semibold">
+        Upload a grant funder document or website you want to summarise.
+    </h5>
+
+    <form id="checkForm" class="text-center d-flex flex-column align-items-center" enctype="multipart/form-data">
+        <div class="upload-box p-4 w-100" style="max-width: 800px;">
+            <div class="text-center mb-3">
+                <img src="{{ url_for('static', filename='assets/upload-icon.svg') }}" alt="Upload Icon" style="height: 48px;" />
+            </div>
+
+            <div class="mb-3 text-center">
+                <label for="hiddenFileInput" class="form-label fw-semibold" style="cursor: pointer;">
+                    <u>Choose file</u> <span class="fw-normal">or drag and drop.</span>
+                </label>
+                <p class="text-muted small" id="fileNameDisplay">Supported: pdf, doc, txt.</p>
+                <input type="file" name="file" id="hiddenFileInput" style="display: none;">
+            </div>
+
+            <div class="d-flex align-items-center justify-content-center my-3">
+                <div class="divider-line"></div>
+                <span class="mx-3 fw-semibold text-success">OR</span>
+                <div class="divider-line"></div>
+            </div>
+
+            <div class="mb-3 text-center">
+                <input type="text" name="url" placeholder="Enter a website URL here." class="form-control url-input" style="max-width: 600px; margin: 0 auto;">
+            </div>
+        </div>
+
+        <div class="text-center mt-4">
+            <button type="submit" class="btn custom-summary-button">Summarise Grant</button>
+        </div>
+    </form>
+</div>
+
+<div id="resultBox" class="container my-5"></div>
+
+<!-- Custom Loader -->
+<div id="loadingScreen" class="my-5">
+    <img src="{{ url_for('static', filename='assets/CheckerPal.svg') }}" alt="Loading Logo" style="height: 60px;" class="mb-3">
+    <h3 style="font-family: 'Averia Serif Libre', serif;">Summarising...</h3>
+    <div class="spinner-border text-dark mt-2" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
+
+<script>
+function formatValue(value) {
+    if (!value) return "N/A";
+    if (Array.isArray(value)) return "<ul>" + value.map(v => `<li>${typeof v === 'object' ? JSON.stringify(v) : v}</li>`).join("") + "</ul>";
+    if (typeof value === "object") return "<ul>" + Object.entries(value).map(([k, v]) => `<li><b>${k}:</b> ${v}</li>`).join("") + "</ul>";
+    return value;
+}
+
+document.getElementById("hiddenFileInput").addEventListener("change", function () {
+    const fileName = this.files[0]?.name;
+    if (fileName) {
+        document.getElementById("fileNameDisplay").innerText = `📄 ${fileName}`;
+    }
+});
+
+document.getElementById("checkForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+    const form = new FormData(this);
+    form.append("mode", "grant");
+
+    const box = document.getElementById("resultBox");
+    const loader = document.getElementById("loadingScreen");
+
+    box.innerHTML = "";
+    loader.classList.add("active");
+
+    const res = await fetch("/evaluate", { method: "POST", body: form });
+    const result = await res.json();
+
+    loader.classList.remove("active");
+
+    if (result.error) {
+        box.innerHTML = `<div class="alert alert-danger">${result.error}</div>`;
+    } else {
+        localStorage.setItem("grantSummaryReady", "true");
+        localStorage.setItem("grantData", JSON.stringify(result));
+        updateStepCircles();
+
+        box.innerHTML = `
+            <div class="card p-4 shadow-sm border-0">
+                <h4 class="mb-4">Grant Information</h4>
+                <div class="table-responsive">
+                <table class="table table-borderless align-middle">
+                    <tbody>
+                    <tr><th class="w-25 text-dark">Grant Name</th><td>${formatValue(result.grant_name)}</td></tr>
+                    <tr><th class="text-dark">Description</th><td>${formatValue(result.grant_description)}</td></tr>
+                    <tr><th class="text-dark">Timeline</th><td>${formatValue(result.timeline_condition)}</td></tr>
+                    <tr><th class="text-dark">Eligible Applicants</th><td>${formatValue(result.eligible_applicants)}</td></tr>
+                    <tr><th class="text-dark">Budget Policy</th><td>${formatValue(result.budget_policy)}</td></tr>
+                    <tr><th class="text-dark">Key Directions</th><td>${formatValue(result.key_directions)}</td></tr>
+                    <tr><th class="text-dark">Expenses Allowed</th><td>${formatValue(result.expenses_allowed)}</td></tr>
+                    <tr><th class="text-dark">Expenses Disallowed</th><td>${formatValue(result.expenses_disallowed)}</td></tr>
+                    <tr><th class="text-dark">Selection Criteria</th><td>${formatValue(result.selection_criteria)}</td></tr>
+                    <tr><th class="text-dark">Supporting Documents Required</th><td>${formatValue(result.supporting_documents_required)}</td></tr>
+                    </tbody>
+                </table>
+                </div>
+            </div>`;
+    }
+});
+
+function updateStepCircles() {
+    const step2 = document.getElementById("step2");
+    const step3 = document.getElementById("step3");
+    const step2Circle = document.getElementById("step2Circle");
+    const step3Circle = document.getElementById("step3Circle");
+
+    if (localStorage.getItem("grantSummaryReady") === "true") {
+        step2Circle.classList.add("active");
+        step2.style.cursor = "pointer";
+        step2.addEventListener("click", () => window.location.href = "/eligibility");
+    }
+
+    if (localStorage.getItem("grantSummaryReady") === "true" &&
+        localStorage.getItem("projectSummaryReady") === "true") {
+        step3Circle.classList.add("active");
+        step3.style.cursor = "pointer";
+        step3.addEventListener("click", () => window.location.href = "/eligibilityresults");
+    }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    localStorage.removeItem("grantSummaryReady");
+    localStorage.removeItem("projectSummaryReady");
+});
+</script>
+
+{% endblock %}

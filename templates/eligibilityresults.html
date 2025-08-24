@@ -1,0 +1,179 @@
+{% extends "base.html" %}
+{% block title %}Eligibility Results{% endblock %}
+{% block content %}
+
+<!-- Logo and Title -->
+<div class="text-center my-4">
+    <img src="{{ url_for('static', filename='assets/CheckerPal.svg') }}" alt="CheckerPal Logo" style="height: 60px;">
+    <h2 class="mt-2" style="font-family: 'Averia Serif Libre', serif;">Checker Pal</h2>
+</div>
+
+<!-- Step Tracker -->
+<!-- Step Progress Tracker -->
+<div class="step-progress mb-4">
+  <div class="step">
+    <a href="/checkerpal" class="step-link">
+      <div class="circle">1</div>
+      <div class="label">Grant Summary</div>
+    </a>
+  </div>
+  <div class="step">
+    <a href="/eligibility" class="step-link">
+      <div class="circle">2</div>
+      <div class="label">Project Summary</div>
+    </a>
+  </div>
+  <div class="step">
+    <div class="step-link">
+      <div class="circle active-step">3</div>
+      <div class="label">Eligibility Match</div>
+    </div>
+  </div>
+</div>
+
+<style>
+.step-progress {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 80px;
+}
+
+.step {
+  text-align: center;
+}
+
+.step-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+}
+
+.circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: #cde2b3;
+  border: 2px solid #4c6c3c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.circle.active-step {
+  background-color: #b6d19b;
+  border-color: #2f4f1f;
+}
+
+.label {
+  font-weight: 600;
+  font-size: 15px;
+  color: #333;
+}
+</style>
+
+
+
+{% if result %}
+<div class="container my-5">
+    <!-- Result Header Card -->
+    <div class="p-4 mb-4 rounded-4 shadow-sm" style="background: linear-gradient(to right, #f6fbea, #eef7db);">
+        <div class="d-flex flex-wrap justify-content-between align-items-center">
+            <div>
+                <h4 class="fw-bold mb-1">{{ result.project_name }}</h4>
+                <div class="text-muted">
+                    Status:
+                    {% if result.overall_match %}
+                        <i class="bi bi-check-circle-fill text-success"></i> <strong class="text-success">Eligible</strong>
+                    {% else %}
+                        <i class="bi bi-x-circle-fill text-danger"></i> <strong class="text-danger">Not Eligible</strong>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="text-end">
+                <div class="fw-semibold">Overall Match Score</div>
+                <div class="display-6 text-success fw-bold">{{ result.match_percent }}%</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Breakdown Cards -->
+    <div class="row g-4">
+        {% set matchItems = [
+            ('Timeline Alignment', result.timeline.match, result.timeline.note, 'bi-clock-history'),
+            ('Budget Within Limits', result.budget.match, result.budget.note, 'bi-cash-stack'),
+            ('Key Directions Overlap', result.key_directions.match, result.key_directions.note, 'bi-bullseye')
+        ] %}
+        {% for title, matched, note, icon in matchItems %}
+        <div class="col-md-4">
+            <div class="p-4 bg-white rounded-4 shadow-sm h-100">
+                <div class="d-flex align-items-center mb-2">
+                    <i class="bi {{ icon }} fs-4 text-dark me-2"></i>
+                    <strong>{{ title }}</strong>
+                </div>
+                <div>
+                    {% if matched %}
+                        <i class="bi bi-check-circle-fill text-success"></i>
+                    {% else %}
+                        <i class="bi bi-x-circle-fill text-danger"></i>
+                    {% endif %}
+                    <small class="text-muted ms-2">{{ note }}</small>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Save Button -->
+    <form method="POST" action="/save_match" class="mt-5">
+        <input type="hidden" name="project_name" value="{{ result.project_name }}">
+        <input type="hidden" name="project_timeline" value="{{ result.timeline.note }}">
+        <input type="hidden" name="project_budget" value="{{ result.budget.note }}">
+        <input type="hidden" name="project_tags" value="{{ result.key_directions.note }}">
+        <input type="hidden" name="match_percent" value="{{ result.match_percent }}">
+        <input type="hidden" name="is_urgent" value="{{ 'True' if result.timeline.match and '30' in result.timeline.note else 'False' }}">
+        <button type="submit" class="btn btn-success btn-lg d-block mx-auto px-5">
+            <i class="bi bi-save me-2"></i> Save Match to TrackerPal
+        </button>
+    </form>
+
+    <!-- Other Info Table -->
+    <div class="mt-5">
+        <h5 class="mb-3">Other Relevant Information</h5>
+        <div class="table-responsive rounded-4 shadow-sm">
+            <table class="table table-borderless bg-white">
+                <tbody>
+                    <tr><th class="bg-light">Eligible Applicants</th><td>{{ result.other_fields.eligible_applicants or 'N/A' }}</td></tr>
+                    <tr><th class="bg-light">Target Beneficiaries</th><td>{{ result.other_fields.target_beneficiaries or 'N/A' }}</td></tr>
+                    <tr>
+                        <th class="bg-light">Selection Criteria</th>
+                        <td>
+                            {% if result.other_fields.selection_criteria is iterable and result.other_fields.selection_criteria is not string %}
+                                <ul class="mb-0">
+                                    {% for item in result.other_fields.selection_criteria %}
+                                        <li>{{ item }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                {{ result.other_fields.selection_criteria or 'N/A' }}
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr><th class="bg-light">Project Justification</th><td>{{ result.other_fields.justification or 'N/A' }}</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="text-center my-5">
+    <h4 class="text-danger"><i class="bi bi-exclamation-triangle-fill me-2"></i>Unable to load eligibility results.</h4>
+</div>
+{% endif %}
+
+{% endblock %}

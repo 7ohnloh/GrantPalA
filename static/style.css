@@ -1,0 +1,281 @@
+/* ===== Base Styling ===== */
+/* body {
+    display: flex;
+    min-height: 100vh;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f1f3f5;
+} */
+
+html, body {
+    height: 100%;
+    overflow-y: auto;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f1f3f5;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+.main-content {
+    margin-left: 299px;
+    padding: 20px;
+    min-height: 100vh;
+    overflow-y: auto;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Averia Serif Libre', cursive;
+}
+
+
+/* ===== Sidebar Styling ===== */
+.sidebar {
+    position:fixed;
+    width: 299px;
+    height: 865px;
+    top: 0;
+    left: 0;
+    border: 1px solid;
+    border-color: #e4e4e4;
+    box-shadow: 0.3px 1px 5px #0000000f;
+    background: linear-gradient(
+    180deg,
+    rgba(190, 217, 223, 0.33) 14%,
+    rgba(219, 229, 255, 0.43) 50%,
+    rgba(241, 232, 251, 0.19) 100%
+  );
+}
+
+.sidebar h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: #333;
+    text-align: center;
+    padding-top: 0;
+}
+
+.text-center.mb-4 {
+    margin-bottom: 1rem;
+}
+
+/* .sidebar img {
+    display: block;
+    height: 80px;
+} */
+
+.nav-link {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #222;
+    padding: 14px 12px 14px 30px;
+    border-radius: 10px;
+    margin-left: 14px;
+    margin-right: 14px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    transition: background 0.5s, color 0.5s;
+    text-decoration: none;
+}
+
+.nav-link i {
+    font-size: 1.2rem;
+    margin-right: 8px;
+}
+
+.nav-link:hover {
+    background-color: #e4ebff;
+    color: #4b4fef;
+}
+
+.nav-link.active {
+    background-color: white;
+    border: 1px solid #d5dbff;
+    color: #4b4fef;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.03);
+    padding: 14px 12px 14px 30px;
+    max-width: 250px;
+    padding-left: 20px;
+}
+
+/* ===== Main Content ===== */
+.main-content {
+    margin-left: 299px;
+    padding: 20px;
+}
+
+/* ===== Card Styling ===== */
+.card {
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease;
+    width: 100%;
+    max-width: 100%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+.card:hover {
+    transform: translateY(-2px);
+}
+
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
+
+/* ===== Inputs & Buttons ===== */
+.form-select,
+.form-control {
+    border-radius: 12px;
+    font-size: 0.85rem;
+    padding: 0.4rem 0.6rem;
+    border: 1px solid #dee2e6;
+}
+
+.btn-outline-primary,
+.btn-outline-secondary {
+    border-radius: 12px;
+    font-size: 0.85rem;
+}
+.btn-outline-primary {
+    color: #5865F2;
+    border-color: #5865F2;
+}
+.btn-outline-primary:hover {
+    background-color: #5865F2;
+    color: white;
+}
+
+/* ===== Badge and Task List ===== */
+.badge.bg-success {
+    background-color: #2ecc71 !important;
+    font-size: 0.85rem;
+    padding: 0.35em 0.65em;
+    border-radius: 8px;
+}
+
+.list-group-item {
+    border: none;
+    border-radius: 10px;
+    background-color: #f8f9fa;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+/* ===== Calendar Embed Styling ===== */
+iframe {
+    border-radius: 12px;
+    border: none !important;
+}
+
+/* ===== Typography Tweaks ===== */
+h3, h5, h6 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+}
+
+.table th {
+    width: 250px;
+    background-color: #f8f9fa;
+    font-weight: 600;
+    vertical-align: top;
+}
+
+.table td ul {
+    padding-left: 1.25rem;
+    margin: 0;
+    list-style-type: disc;
+}
+
+.table td ul li {
+    margin-bottom: 0.25rem;
+    line-height: 1.4;
+}
+/* ===== Pal Icons ===== */
+.CheckerPalIcon{
+    display: block; /*remove inline space*/
+    width: 60px;
+    height: auto;
+    align-self: flex-start;
+    margin: 0 0 4px 0px; /* ← 20px from the left */
+    transform: rotate(-8deg);
+}
+.DeadlinePalIcon{
+    display: block; /*remove inline space*/
+    width: 60px;
+    height: auto;
+    align-self: flex-start;
+    transform: rotate(30deg);
+}
+.AnswerPalIcon{
+    display: block; /*remove inline space*/
+    width: 60px;
+    height: auto;
+}
+.grantpal-icons{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    padding-top: 50px;
+}
+.grantpal-heading {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 40px;
+}
+.sidebar h2.grantpal-title{
+    font-weight: 500;
+    font-size: 1.5rem;
+    margin-top: 4px;
+    margin-bottom: 0;
+    line-height: 1.2;
+}
+.grantpal-title-row {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    padding-left: 10px;
+    margin-top:8px;
+}
+
+/* ========Landing Page========*/
+.project-wrapper {
+    border: 2px solid #e6e6e6;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05); /* optional soft shadow */
+}
+.project-header {
+    margin-bottom: 4px;
+}
+.card-body-bordered {
+    border: 1px solid #e6e6e6;
+    border-radius: 15px;
+    padding: 1rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.card-body {
+    width: 100%;
+    white-space: normal; /* override any nowrap inheritance */
+}
+
+.card-body p,
+.card-body h6,
+.card-body strong {
+    word-break: break-word;
+    overflow-wrap: anywhere;
+}
+
+.custom-separator {
+  border-top: 2px solid #999;
+  margin-top: 8px !important;      /* keep close to header */
+  margin-bottom: 20px !important;  /* bigger gap below */
+}
