@@ -451,6 +451,52 @@ input[type="date"].no-calendar-icon::-webkit-calendar-picker-indicator {
     margin-left: -25px;
     margin-right: -25px;
 }
+
+/* ===== Home layout polish: centered container + fixed right rail ===== */
+@media (min-width: 992px) {
+  /* keep the whole page from stretching too wide */
+  .home-page .container-fluid {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  /* give a comfy gutter */
+  .home-page .row { --bs-gutter-x: 24px; }
+
+  /* MAIN (left/middle) column = fluid */
+  .home-page .container-fluid > .row > .col-md-9 {
+    flex: 1 1 auto !important;
+    max-width: none !important;
+    min-width: 0;                 /* prevents content from forcing overflow */
+  }
+
+  /* RIGHT rail = fixed width */
+  .home-page .container-fluid > .row > .col-md-3 {
+    flex: 0 0 340px !important;
+    max-width: 340px !important;
+  }
+}
+
+/* make widgets in the right rail never overflow */
+.home-page .todolist-container,
+.home-page .custom-calendar-container { width: 100%; }
+.home-page .custom-calendar-container iframe {
+  width: 100% !important;
+  height: 400px;
+  border: 0;
+  border-radius: 12px;
+}
+
+/* horizontal card scroller should not push page width */
+.home-page .horizontal-scroll-wrapper {
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 6px;
+}
+
 </style>
 <div class="home-page">
 <div class="container-fluid">
