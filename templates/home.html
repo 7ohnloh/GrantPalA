@@ -197,7 +197,7 @@ input[type="date"].no-calendar-icon::-webkit-calendar-picker-indicator {
 /* ===== Right Rail Widgets ===== */
 .home-page .custom-calendar-container {
     margin-top: 25px;
-    width: 100%;         /* responsive, no fixed px */
+    width: 100%;
     height: 400px;
     border: 1px solid #e6e6e6;
     border-radius: 12px;
@@ -208,11 +208,11 @@ input[type="date"].no-calendar-icon::-webkit-calendar-picker-indicator {
     border-radius: 8px;
     padding: 15px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    width: 100%;         /* responsive, no fixed px */
+    width: 100%;
     background-color: #ffffff;
 }
 .home-page .todolist-button {
-    width: 100%;         /* responsive */
+    width: 100%;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -236,25 +236,6 @@ input[type="date"].no-calendar-icon::-webkit-calendar-picker-indicator {
 /* Expandable list */
 .home-page .collapsed-list { max-height: 255px; overflow-y: hidden; transition: max-height 0.5s ease-in-out; }
 .home-page .collapsed-list.expanded { max-height: 1000px; }
-
-/* Pink tick */
-.home-page .custom-tick {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    width: 20px; height: 20px;
-    border-radius: 50%;
-    background-color: #FF00A1;
-    color: white;
-    font-size: 12px;
-    line-height: 1;
-    font-style: normal;
-    cursor: pointer;
-    transition: background-color 0.3s, border-color 0.3s;
-}
-.home-page .custom-tick::before { content: "\2713"; }
-.home-page .custom-tick.outlined { background-color: transparent; border: 1px dashed #FF00A1; color: transparent; }
-.home-page .custom-tick:hover { opacity: 0.8; }
 
 /* ===== Project expansion ===== */
 .home-page .project-list-container { max-height: 600px; overflow: hidden; transition: max-height 0.4s ease-in-out; position: relative; padding-bottom: 20px; }
@@ -292,7 +273,8 @@ input[type="date"].no-calendar-icon::-webkit-calendar-picker-indicator {
   .home-page .col-right { position: sticky; top: 88px; }
 }
 
-/* Default = outlined (empty dashed circle) */
+/* ===== To-do tick: single, consistent system ===== */
+/* Default = unticked (empty dashed circle) */
 .home-page .custom-tick {
     display: inline-flex;
     justify-content: center;
@@ -300,27 +282,22 @@ input[type="date"].no-calendar-icon::-webkit-calendar-picker-indicator {
     width: 24px;
     height: 24px;
     border-radius: 50%;
-    border: 2px dashed #FF00A1;   /* always has a border */
+    border: 2px dashed #FF00A1;     /* circle stays perfectly round */
     background-color: transparent;
-    color: transparent;           /* hide ✓ */
+    color: transparent;              /* hide ✓ */
     font-size: 14px;
     cursor: pointer;
-    box-sizing: border-box;
+    box-sizing: border-box;          /* include border in size */
     transition: background-color 0.3s, border-color 0.3s;
 }
-
-.home-page .custom-tick::before {
-    content: "\2713"; /* ✓ */
-}
+.home-page .custom-tick::before { content: "\2713"; } /* ✓ */
 
 /* Checked = pink filled circle with tick */
 .home-page .custom-tick.checked {
     background-color: #FF00A1;
-    border: 2px solid #FF00A1;   /* replace dashed with solid pink */
-    color: white;
+    border: 2px solid #FF00A1;       /* same thickness as dashed */
+    color: #fff;
 }
-
-
 </style>
 
 <div class="home-page">
@@ -664,172 +641,168 @@ Budget: Up to $20,000</p>
 <button class="btn btn-outline-secondary w-100">+ New Grant</button>
 </div>
 </div>
+
 <div class="col-md-3 col-right">
-<div class="mb-4 todolist-container">
-<h5 class="todolist-heading">To-do List</h5>
-<ul class="list-group rounded-0 collapsed-list">
-<div class="d-flex align-items-center mb-2 list-item-wrapper">
-<li class="list-group-item custom-list-item">
-<div>
-<span class="task-title">Temasek Foundation Application</span>
-<small class="text-muted d-block">By Aug 25</small>
+  <div class="mb-4 todolist-container">
+    <h5 class="todolist-heading">To-do List</h5>
+    <ul class="list-group rounded-0 collapsed-list">
+
+      <div class="d-flex align-items-center mb-2 list-item-wrapper">
+        <li class="list-group-item custom-list-item">
+          <div>
+            <span class="task-title">Temasek Foundation Application</span>
+            <small class="text-muted d-block">By Aug 25</small>
+          </div>
+        </li>
+        <i class="custom-tick ms-2"></i>
+      </div>
+
+      <div class="d-flex align-items-center mb-2 list-item-wrapper">
+        <li class="list-group-item custom-list-item">
+          <div>
+            <span class="task-title">Regenerate MCCY answers</span>
+            <small class="text-muted d-block">By Sep 05</small>
+          </div>
+        </li>
+        <i class="custom-tick ms-2"></i>
+      </div>
+
+      <div class="d-flex align-items-center mb-2 list-item-wrapper">
+        <li class="list-group-item custom-list-item">
+          <div>
+            <span class="task-title">Finalize MCCY Application</span>
+            <small class="text-muted d-block">By Sep 08</small>
+          </div>
+        </li>
+        <i class="custom-tick ms-2"></i>
+      </div>
+
+      <div class="d-flex align-items-center mb-2 list-item-wrapper">
+        <li class="list-group-item custom-list-item">
+          <div>
+            <span class="task-title">Care Companion Grant Applications</span>
+            <small class="text-muted d-block">By Sep 21</small>
+          </div>
+        </li>
+        <i class="custom-tick ms-2"></i>
+      </div>
+
+      <div class="d-flex align-items-center mb-2 list-item-wrapper">
+        <li class="list-group-item custom-list-item">
+          <div>
+            <span class="task-title">BeingGuests Grant Applications</span>
+            <small class="text-muted d-block">By Oct 02</small>
+          </div>
+        </li>
+        <i class="custom-tick ms-2"></i>
+      </div>
+
+    </ul>
+    <div class="todolist-divider"></div>
+    <div class="text-center">
+      <button class="btn toggle-list-btn" style="border: none; background: none; padding: 0;">
+        <i class="bi bi-chevron-down"></i>
+      </button>
+    </div>
+  </div>
+
+  <button class="btn btn-outline-secondary mt-2 todolist-button">+ New Task</button>
+
+  <div class="mb-5 custom-calendar-container">
+    <iframe frameborder="0" height="400" scrolling="no" src="https://calendar.google.com/calendar/embed?src=beingthebridges%40gmail.com&ctz=Asia%2FSingapore" style="border: 0"></iframe>
+  </div>
 </div>
-</li>
-<i class="custom-tick ms-2 outlined"></i>
-</div>
-<div class="d-flex align-items-center mb-2 list-item-wrapper">
-<li class="list-group-item custom-list-item">
-<div>
-<span class="task-title">Regenerate MCCY answers</span>
-<small class="text-muted d-block">By Sep 05</small>
-</div>
-</li>
-<i class="custom-tick ms-2 outlined"></i>
-</div>
-<div class="d-flex align-items-center mb-2 list-item-wrapper">
-<li class="list-group-item custom-list-item">
-<div>
-<span class="task-title">Finalize MCCY Application</span>
-<small class="text-muted d-block">By Sep 08</small>
-</div>
-</li>
-<i class="custom-tick ms-2 outlined"></i>
-</div>
-<div class="d-flex align-items-center mb-2 list-item-wrapper">
-<li class="list-group-item custom-list-item">
-<div>
-<span class="task-title">Care Companion Grant Applications</span>
-<small class="text-muted d-block">By Sep 21</small>
-</div>
-</li>
-<i class="custom-tick ms-2"></i>
-</div>
-<div class="d-flex align-items-center mb-2 list-item-wrapper">
-<li class="list-group-item custom-list-item">
-<div>
-<span class="task-title">BeingGuests Grant Applications</span>
-<small class="text-muted d-block">By Oct 02</small>
-</div>
-</li>
-<i class="custom-tick ms-2"></i>
-</div>
-</ul>
-<div class="todolist-divider"></div>
-<div class="text-center">
-<button class="btn toggle-list-btn" style="border: none; background: none; padding: 0;">
-<i class="bi bi-chevron-down"></i>
-</button>
+
 </div>
 </div>
-<button class="btn btn-outline-secondary mt-2 todolist-button">+ New Task</button>
-<div class="mb-5 custom-calendar-container">
-<iframe frameborder="0" height="400" scrolling="no" src="https://calendar.google.com/calendar/embed?src=beingthebridges%40gmail.com&amp;ctz=Asia%2FSingapore" style="border: 0">
-</iframe>
-</div>
-</div>
-</div>
-</div>
+
 <div aria-hidden="true" aria-labelledby="successModalLabel" class="modal fade" id="successModal" tabindex="-1">
-<div class="modal-dialog modal-dialog-centered">
-<div class="modal-content">
-<div class="modal-body text-center">
-<div class="d-flex align-items-center justify-content-center mb-3">
-<i class="bi bi-check-circle-fill me-2" style="color: #e83e8c; font-size: 1.5rem;"></i>
-<h5 class="fw-normal mb-0">Date added to Google Calendar!</h5>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body text-center">
+        <div class="d-flex align-items-center justify-content-center mb-3">
+          <i class="bi bi-check-circle-fill me-2" style="color: #e83e8c; font-size: 1.5rem;"></i>
+          <h5 class="fw-normal mb-0">Date added to Google Calendar!</h5>
+        </div>
+        <button class="btn btn-outline-secondary" data-bs-dismiss="modal" type="button">Done</button>
+      </div>
+    </div>
+  </div>
 </div>
-<button class="btn btn-outline-secondary" data-bs-dismiss="modal" type="button">Done</button>
-</div>
-</div>
-</div>
-</div>
+
 <script>
 // Status color handler
 function updateStatusColor(dropdown) {
-    // Remove all the bg and text-white classes first
-    dropdown.classList.remove("bg-warning", "bg-info", "bg-danger", "text-white");
-
-    // Add appropriate classes based on selected value
-    if (dropdown.value === "Not Started") {
-        dropdown.classList.add("bg-warning"); // yellowish background
-        dropdown.classList.remove("text-white"); // dark text
-    } else if (dropdown.value === "In Progress") {
-        dropdown.classList.add("bg-info", "text-white"); // blue bg with white text
-    } else if (dropdown.value === "Urgent") {
-        dropdown.classList.add("bg-danger", "text-white"); // red bg with white text
-    }
+  dropdown.classList.remove("bg-warning", "bg-info", "bg-danger", "text-white");
+  if (dropdown.value === "Not Started") {
+    dropdown.classList.add("bg-warning");
+  } else if (dropdown.value === "In Progress") {
+    dropdown.classList.add("bg-info", "text-white");
+  } else if (dropdown.value === "Urgent") {
+    dropdown.classList.add("bg-danger", "text-white");
+  }
 }
-
-// Initialize colors on page load and listen for changes
 document.querySelectorAll('.status-dropdown').forEach(dropdown => {
-    updateStatusColor(dropdown); // Set initial color
-    dropdown.addEventListener('change', () => updateStatusColor(dropdown));
+  updateStatusColor(dropdown);
+  dropdown.addEventListener('change', () => updateStatusColor(dropdown));
 });
 
 // Save to Calendar Button
 document.querySelectorAll('.save-to-calendar-btn, .save-calendar-btn').forEach(button => {
-    button.addEventListener('click', async () => {
-        const container = button.closest('.card-body');
-        const dateInput = container.querySelector('input[type="date"]');
-        const dueDate = dateInput.value;
-        const title = button.dataset.title;
-        const description = button.dataset.description;
+  button.addEventListener('click', async () => {
+    const container = button.closest('.card-body');
+    const dateInput = container.querySelector('input[type="date"]');
+    const dueDate = dateInput.value;
+    const title = button.dataset.title;
+    const description = button.dataset.description;
 
-        if (!dueDate) return alert("Please select a date before saving to calendar.");
+    if (!dueDate) return alert("Please select a date before saving to calendar.");
 
-        const response = await fetch('/add-to-calendar', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ title, description, date: dueDate })
-        });
-
-        const result = await response.json();
-        if (result.success) {
-            const successModal = new bootstrap.Modal(document.getElementById('successModal'));
-            successModal.show();
-        }
-        else alert("❌ Failed to add to calendar.");
+    const response = await fetch('/add-to-calendar', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ title, description, date: dueDate })
     });
-});
-document.querySelectorAll('.calendar-icon').forEach(icon => {
-  icon.addEventListener('click', () => {
-    const input = icon.previousElementSibling;
-    if (input && input.showPicker) {
-      input.showPicker();
+
+    const result = await response.json();
+    if (result.success) {
+      const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+      successModal.show();
     } else {
-      input.focus();
+      alert("❌ Failed to add to calendar.");
     }
   });
 });
 
-// Get all elements with the class 'custom-tick'
-const ticks = document.querySelectorAll('.custom-tick');
-
-// Loop through each tick and add a click event listener
-ticks.forEach(tick => {
-    tick.addEventListener('click', () => {
-        // This toggles the 'outlined' class on and off
-        tick.classList.toggle('outlined');
-    });
+// Open date picker when calendar icon clicked
+document.querySelectorAll('.calendar-icon').forEach(icon => {
+  icon.addEventListener('click', () => {
+    const input = icon.previousElementSibling;
+    if (input && input.showPicker) input.showPicker();
+    else input.focus();
+  });
 });
 
-// New script for project section expansion
+// Tick toggle: add/remove .checked (no .outlined anymore)
+document.querySelectorAll('.custom-tick').forEach(tick => {
+  tick.addEventListener('click', () => {
+    tick.classList.toggle('checked');
+  });
+});
+
+// Project section expansion
 const projectsContainer = document.querySelector('.project-list-container');
 const projectsToggleBtn = document.querySelector('.toggle-projects-btn');
-const projectsToggleIcon = projectsToggleBtn.querySelector('.bi');
+const projectsToggleIcon = projectsToggleBtn?.querySelector('.bi');
 
-projectsToggleBtn.addEventListener('click', () => {
-    // Toggle the 'expanded' class to control the max-height
-    projectsContainer.classList.toggle('expanded');
-    
-    // Toggle the icon
-    if (projectsContainer.classList.contains('expanded')) {
-        projectsToggleIcon.classList.replace('bi-chevron-down', 'bi-chevron-up');
-    } else {
-        projectsToggleIcon.classList.replace('bi-chevron-up', 'bi-chevron-down');
-    }
-
-    // Toggle the fade-out overlay
-    projectsContainer.classList.toggle('collapsed-projects');
+projectsToggleBtn?.addEventListener('click', () => {
+  projectsContainer.classList.toggle('expanded');
+  if (projectsContainer.classList.contains('expanded')) {
+    projectsToggleIcon.classList.replace('bi-chevron-down', 'bi-chevron-up');
+  } else {
+    projectsToggleIcon.classList.replace('bi-chevron-up', 'bi-chevron-down');
+  }
+  projectsContainer.classList.toggle('collapsed-projects');
 });
 
 // To-do List toggle
@@ -838,12 +811,12 @@ const todoToggleBtn = document.querySelector('.toggle-list-btn');
 const todoToggleIcon = todoToggleBtn.querySelector('.bi');
 
 todoToggleBtn.addEventListener('click', () => {
-    todoList.classList.toggle('expanded');
-    if (todoList.classList.contains('expanded')) {
-        todoToggleIcon.classList.replace('bi-chevron-down', 'bi-chevron-up');
-    } else {
-        todoToggleIcon.classList.replace('bi-chevron-up', 'bi-chevron-down');
-    }
+  todoList.classList.toggle('expanded');
+  if (todoList.classList.contains('expanded')) {
+    todoToggleIcon.classList.replace('bi-chevron-down', 'bi-chevron-up');
+  } else {
+    todoToggleIcon.classList.replace('bi-chevron-up', 'bi-chevron-down');
+  }
 });
 </script>
 </div>
