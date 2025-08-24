@@ -298,6 +298,28 @@ input[type="date"].no-calendar-icon::-webkit-calendar-picker-indicator {
     border: 2px solid #FF00A1;       /* same thickness as dashed */
     color: #fff;
 }
+/* Fix to-do list alignment and circle sizing */
+.home-page .list-item-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.home-page .custom-tick {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  min-height: 24px;
+  border-radius: 50%;
+  border: 2px dashed #FF00A1;
+  background-color: transparent;
+  color: transparent;
+  font-size: 14px;
+  line-height: 1;
+  text-align: center;
+}
+
 </style>
 
 <div class="home-page">
