@@ -276,6 +276,22 @@ input[type="date"].no-calendar-icon::-webkit-calendar-picker-indicator {
     top: 88px;
   }
 }
+
+/* === Fixes for Render regression === */
+.home-page .col-right { padding-left: 24px; border-left: 1px solid #eee; }
+.home-page .custom-calendar-container,
+.home-page .todolist-container,
+.home-page .todolist-button { width: 100% !important; }
+.home-page .custom-calendar-container { height: 400px; }
+.home-page iframe { width: 100% !important; }
+.home-page .status-dropdown option[value="In Progress"] { background-color:#FFEEBD; color:#91741F; }
+.home-page .sidebar { height: 100vh; }
+
+@media (min-width: 1200px) {
+  .home-page .container-fluid { max-width: 1240px; margin:0 auto; padding-left:24px; padding-right:32px; }
+  .home-page .col-right { position: sticky; top: 88px; }
+}
+
 </style>
 
 <div class="home-page">
