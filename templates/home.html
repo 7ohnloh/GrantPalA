@@ -488,6 +488,51 @@ input[type="date"].no-calendar-icon::-webkit-calendar-picker-indicator {
   .col-right { position: sticky; top: 88px; }
 }
 
+/* === Right-rail polish: spacing, divider, and containment === */
+@media (min-width: 1200px) {
+  .home-page .container-fluid {
+    max-width: 1240px;         /* slightly narrower so right edge has breathing room */
+    padding-left: 24px;
+    padding-right: 32px;       /* extra right padding so content doesn't feel cramped */
+    margin: 0 auto;
+  }
+
+  .home-page .col-right {
+    padding-left: 24px;        /* gap between main and rail */
+    border-left: 1px solid #eee;/* subtle divider line */
+    position: sticky;
+    top: 88px;                  /* keep in view while scrolling (optional) */
+  }
+}
+
+/* Rail widgets should never exceed rail width */
+.home-page .col-right > * { max-width: 100%; }
+
+/* Make cards in the rail visually consistent and clipped within the rail */
+.home-page .todolist-container,
+.home-page .custom-calendar-container {
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 12px;
+  overflow: hidden;            /* prevents inner shadows/contents from spilling */
+}
+
+/* Calendar iframe fits perfectly */
+.home-page .custom-calendar-container iframe {
+  width: 100% !important;
+  height: 400px;
+  border: 0;
+  border-radius: 0;            /* parent container already has rounded corners */
+}
+
+/* Horizontal scroller won’t push the overall width */
+.home-page .horizontal-scroll-wrapper {
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 6px;
+}
+
 
 </style>
 <div class="home-page">
