@@ -296,28 +296,29 @@ input[type="date"].no-calendar-icon::-webkit-calendar-picker-indicator {
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    width: 22px;              /* fixed size */
-    height: 22px;             /* fixed size */
+    width: 24px;             /* slightly bigger so border fits */
+    height: 24px;
     border-radius: 50%;
-    background-color: #FF00A1; 
+    border: 2px solid transparent; /* reserve space for border */
+    background-color: #FF00A1;
     color: white;
-    font-size: 13px;
+    font-size: 14px;
     line-height: 1;
     font-style: normal;
     cursor: pointer;
     transition: background-color 0.3s, border-color 0.3s;
-    box-sizing: border-box;   /* ensures border included in the fixed size */
+    box-sizing: border-box;  /* includes border in the fixed size */
 }
 
 .home-page .custom-tick::before {
-    content: "\2713";  /* checkmark */
+    content: "\2713"; /* ✓ */
 }
 
 /* Outlined state */
 .home-page .custom-tick.outlined {
     background-color: transparent;
-    border: 2px dashed #FF00A1;   /* thicker dashed border */
-    color: transparent;           /* hides the ✓ */
+    border: 2px dashed #FF00A1; /* same thickness as transparent border */
+    color: transparent;
 }
 
 </style>
